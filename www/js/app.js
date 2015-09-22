@@ -96,7 +96,7 @@ angular.module('starter', ['ionic'])
       expiration_date: expDate
     }
     fbLogged.resolve(authData);
-    console.log(response);
+    alert('Response: '+response);
   };
 
   var fbLoginError = function(error){
@@ -104,14 +104,14 @@ angular.module('starter', ['ionic'])
   };
 
   $scope.login = function() {
-    console.log('Login');
+    alert('Login');
     if (!window.cordova) {
       facebookConnectPlugin.browserInit('1536111309938547');
     }
     facebookConnectPlugin.login(['email'], fbLoginSuccess, fbLoginError);
   
     fbLogged.then( function(authData) {
-      console.log('Promised');
+      alert('Promised');
       return Parse.FacebookUtils.logIn(authData);
     })
     .then( function(userObject) {
@@ -123,12 +123,12 @@ angular.module('starter', ['ionic'])
           userObject.save();
         },
         function(error) {
-          console.log(error);
+          alert('Error+'+error);
         }
       );
       $state.go('home');
     }, function(error) {
-      console.log(error);
+      alert('Error+'+error);
     });
   };
 }])
